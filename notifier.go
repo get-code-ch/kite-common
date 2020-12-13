@@ -15,7 +15,7 @@ type (
 		// without losing functionality.
 		Notify(Event, Observer)
 		// Broadcast broadcast events to all connected endpoints.
-		Broadcast(Event)
+		Close(Event)
 	}
 
 	EventNotifier struct {
@@ -33,14 +33,14 @@ func (n *EventNotifier) Deregister(l Observer) {
 	delete(n.Observers, l)
 }
 
-func (n *EventNotifier) Notify(e Event, r Observer, receiver Endpoint) {
+func (n *EventNotifier) Notify(e Event, l Observer, receiver Endpoint) {
 	for o := range n.Observers {
-		o.OnNotify(e, r, receiver)
+		o.OnNotify(e, l, receiver)
 	}
 }
 
-func (n *EventNotifier) Broadcast(e Event) {
+func (n *EventNotifier) Close(e Event) {
 	for o := range n.Observers {
-		o.OnBroadcast(e)
+		o.OnClose(e)
 	}
 }

@@ -7,7 +7,7 @@ type (
 		// OnNotify allows an event to be "published" to interface implementations.
 		// In the "real world", error handling would likely be implemented.
 		OnNotify(Event, Observer, Endpoint)
-		OnBroadcast(Event)
+		OnClose(Event)
 		Key() interface{}
 	}
 

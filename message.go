@@ -36,10 +36,14 @@ const (
 	ANY      HostType = "*"
 
 	// Action definition
+	LOG      Action = "log"
 	NOTIFY   Action = "notify"
 	REGISTER Action = "register"
 	REJECTED Action = "rejected"
 	ACCEPTED Action = "accepted"
+	SETUP    Action = "setup"
+
+
 )
 
 func (e Endpoint) String() string {
@@ -93,8 +97,18 @@ func (ht HostType) IsValid() error {
 	return errors.New("not HostType string")
 }
 
+func (a Action) IsValid() error {
+	switch a {
+	case LOG, NOTIFY, REGISTER, REJECTED, ACCEPTED, SETUP:
+		return nil
+	}
+	return errors.New(fmt.Sprintf("%s is not a valid action", a))
+}
+
+
+
 func (e Endpoint) Match(comp Endpoint) bool {
-	if (e.Domain == comp.Domain || comp.Type == "*") &&
+	if (e.Domain == comp.Domain || comp.Domain == "*") &&
 		(e.Type == comp.Type || comp.Type == "*") &&
 		(e.Address == comp.Address || comp.Address == "*") &&
 		(e.Host == comp.Host || comp.Host == "*") &&
@@ -103,5 +117,4 @@ func (e Endpoint) Match(comp Endpoint) bool {
 	} else {
 		return false
 	}
-
 }
