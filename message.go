@@ -1,6 +1,7 @@
 package kite_common
 
 import (
+	"encoding/json"
 	"errors"
 	"fmt"
 	"regexp"
@@ -24,6 +25,7 @@ type (
 		Receiver Endpoint
 		Data     interface{}
 	}
+
 )
 
 const (
@@ -37,13 +39,12 @@ const (
 
 	// Action definition
 	LOG      Action = "log"
+	READLOG  Action = "read_log"
 	NOTIFY   Action = "notify"
 	REGISTER Action = "register"
 	REJECTED Action = "rejected"
 	ACCEPTED Action = "accepted"
 	SETUP    Action = "setup"
-
-
 )
 
 func (e Endpoint) String() string {
@@ -99,13 +100,11 @@ func (ht HostType) IsValid() error {
 
 func (a Action) IsValid() error {
 	switch a {
-	case LOG, NOTIFY, REGISTER, REJECTED, ACCEPTED, SETUP:
+	case LOG, READLOG, NOTIFY, REGISTER, REJECTED, ACCEPTED, SETUP:
 		return nil
 	}
 	return errors.New(fmt.Sprintf("%s is not a valid action", a))
 }
-
-
 
 func (e Endpoint) Match(comp Endpoint) bool {
 	if (e.Domain == comp.Domain || comp.Domain == "*") &&
@@ -117,4 +116,12 @@ func (e Endpoint) Match(comp Endpoint) bool {
 	} else {
 		return false
 	}
+}
+
+func (lm LogMessage) SetFromInterface(data interface{}) LogMessage {
+
+	marshal, _ := json.Marshal(data)
+	converted := LogMessage{}
+	json.Unmarshal(marshal, &converted)
+	return converted
 }
