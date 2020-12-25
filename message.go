@@ -30,21 +30,22 @@ type (
 
 const (
 	// HostType definition
-	BROWSER  HostType = "browser"
-	DEVICE   HostType = "device"
-	CLI      HostType = "cli"
-	SERVER   HostType = "server"
-	ENDPOINT HostType = "endpoint"
-	ANY      HostType = "*"
+	H_BROWSER  HostType = "browser"
+	H_DEVICE   HostType = "device"
+	H_CLI      HostType = "cli"
+	H_SERVER   HostType = "server"
+	H_ENDPOINT HostType = "endpoint"
+	H_ANY      HostType = "*"
 
 	// Action definition
-	LOG      Action = "log"
-	READLOG  Action = "read_log"
-	NOTIFY   Action = "notify"
-	REGISTER Action = "register"
-	REJECTED Action = "rejected"
-	ACCEPTED Action = "accepted"
-	SETUP    Action = "setup"
+	A_LOG      Action = "log"
+	A_READLOG  Action = "read_log"
+	A_NOTIFY   Action = "notify"
+	A_REGISTER Action = "register"
+	A_REJECTED Action = "rejected"
+	A_ACCEPTED Action = "accepted"
+	A_SETUP    Action = "setup"
+	A_ACTIVATE Action = "activate"
 )
 
 func (e Endpoint) String() string {
@@ -60,7 +61,7 @@ func (e *Endpoint) StringToEndpoint(str string) {
 		if idx == 1 {
 			e.Type = HostType(value)
 			if err := e.Type.IsValid(); err != nil {
-				e.Type = ANY
+				e.Type = H_ANY
 			}
 		}
 		if idx == 2 {
@@ -77,7 +78,7 @@ func (e *Endpoint) StringToEndpoint(str string) {
 		e.Domain = "*"
 	}
 	if e.Type == "" {
-		e.Type = ANY
+		e.Type = H_ANY
 	}
 	if e.Host == "" {
 		e.Host = "*"
@@ -92,7 +93,7 @@ func (e *Endpoint) StringToEndpoint(str string) {
 
 func (ht HostType) IsValid() error {
 	switch ht {
-	case BROWSER, DEVICE, CLI, SERVER, ENDPOINT, ANY:
+	case H_BROWSER, H_DEVICE, H_CLI, H_SERVER, H_ENDPOINT, H_ANY:
 		return nil
 	}
 	return errors.New("not HostType string")
@@ -100,7 +101,7 @@ func (ht HostType) IsValid() error {
 
 func (a Action) IsValid() error {
 	switch a {
-	case LOG, READLOG, NOTIFY, REGISTER, REJECTED, ACCEPTED, SETUP:
+	case A_LOG, A_READLOG, A_NOTIFY, A_REGISTER, A_REJECTED, A_ACCEPTED, A_SETUP, A_ACTIVATE:
 		return nil
 	}
 	return errors.New(fmt.Sprintf("%s is not a valid action", a))
