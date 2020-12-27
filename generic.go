@@ -9,7 +9,7 @@ type (
 	}
 )
 
-func (o *GenericEventObserver) OnNotify(e Event, r Observer, receiver Endpoint) {
+func (o *GenericEventObserver) OnNotify(e Event, r Observer, receiver Address) {
 	fmt.Printf("*** Notify %s***\n", e.Data)
 }
 

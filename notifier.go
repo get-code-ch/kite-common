@@ -33,7 +33,7 @@ func (n *EventNotifier) Deregister(l Observer) {
 	delete(n.Observers, l)
 }
 
-func (n *EventNotifier) Notify(e Event, l Observer, receiver Endpoint) {
+func (n *EventNotifier) Notify(e Event, l Observer, receiver Address) {
 	for o := range n.Observers {
 		o.OnNotify(e, l, receiver)
 	}
