@@ -25,7 +25,7 @@ type (
 	}
 
 	IC struct {
-		Address     string `bson:"address" json:"address"`
+		Address     int    `bson:"address" json:"address"`
 		Type        IcRef  `bson:"type" json:"type"`
 		Name        string `bson:"name,omitempty" json:"name,omitempty"`
 		Description string `bson:"description,omitempty" json:"description,omitempty"`
