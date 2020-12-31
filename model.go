@@ -31,12 +31,20 @@ type (
 		Description string `bson:"description,omitempty" json:"description,omitempty"`
 	}
 
+	Notification struct {
+		Telegram bool `bson:"telegram,omitempty" json:"telegram,omitempty"`
+		Max      float64  `bson:"max,omitempty" json:"max,omitempty"`
+		Min      float64  `bson:"min,omitempty" json:"min,omitempty"`
+	}
+
 	Endpoint struct {
-		Id         primitive.ObjectID     `bson:"_id,omitempty" json:"id,omitempty"`
-		Name       string                 `bson:"name,omitempty" json:"name,omitempty"`
-		IC         IC                     `bson:"ic,omitempty" json:"ic,omitempty"`
-		Address    Address                `bson:"address" json:"address"`
-		Attributes map[string]interface{} `bson:"attributes,omitempty" json:"attributes,omitempty"`
+		Id           primitive.ObjectID     `bson:"_id,omitempty" json:"id,omitempty"`
+		Name         string                 `bson:"name,omitempty" json:"name,omitempty"`
+		Description  string                 `bson:"description,omitempty" json:"description,omitempty"`
+		IC           IC                     `bson:"ic,omitempty" json:"ic,omitempty"`
+		Address      Address                `bson:"address" json:"address"`
+		Attributes   map[string]interface{} `bson:"attributes,omitempty" json:"attributes,omitempty"`
+		Notification Notification           `bson:"notification,omitempty" json:"notification,omitempty"`
 	}
 )
 
