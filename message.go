@@ -47,6 +47,8 @@ const (
 	A_ACTIVATE  Action = "activate"
 	A_CMD       Action = "cmd"
 	A_PROVISION Action = "provisioning"
+	A_VALUE     Action = "value"
+	A_DISCOVER  Action = "discover"
 
 	// Command definition
 	CMD_PUSH    Command = "push"
@@ -54,7 +56,6 @@ const (
 	CMD_SET     Command = "set"
 	CMD_REVERSE Command = "reverse"
 )
-
 
 func (ht HostType) IsValid() error {
 	switch ht {
@@ -70,7 +71,7 @@ func (ht HostType) String() string {
 
 func (a Action) IsValid() error {
 	switch a {
-	case A_LOG, A_READLOG, A_NOTIFY, A_REGISTER, A_REJECTED, A_ACCEPTED, A_SETUP, A_ACTIVATE, A_CMD, A_PROVISION:
+	case A_LOG, A_READLOG, A_NOTIFY, A_REGISTER, A_REJECTED, A_ACCEPTED, A_SETUP, A_ACTIVATE, A_CMD, A_PROVISION, A_VALUE, A_DISCOVER:
 		return nil
 	}
 	return errors.New(fmt.Sprintf("%s is not a valid action", a))
