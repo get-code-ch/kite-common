@@ -27,6 +27,7 @@ type (
 	}
 )
 
+//goland:noinspection GoSnakeCaseUsage
 const (
 	// HostType definition
 	H_BROWSER  HostType = "browser"
@@ -37,18 +38,19 @@ const (
 	H_ANY      HostType = "*"
 
 	// Action definition
-	A_LOG       Action = "log"
-	A_READLOG   Action = "read_log"
-	A_NOTIFY    Action = "notify"
-	A_REGISTER  Action = "register"
-	A_REJECTED  Action = "rejected"
-	A_ACCEPTED  Action = "accepted"
-	A_SETUP     Action = "setup"
-	A_ACTIVATE  Action = "activate"
-	A_CMD       Action = "cmd"
-	A_PROVISION Action = "provisioning"
-	A_VALUE     Action = "value"
-	A_DISCOVER  Action = "discover"
+	A_LOG       Action = "log"          // From client to server: send a log message (will be store in log collection) / From server to client: send the log history
+	A_READLOG   Action = "read_log"     // Request log history to the server
+	A_NOTIFY    Action = "notify"       // Send a message to other endpoint
+	A_REGISTER  Action = "register"     // Try to register endpoint to server
+	A_REJECTED  Action = "rejected"     // Reject message from server
+	A_ACCEPTED  Action = "accepted"     // Accept message from server
+	A_SETUP     Action = "setup"        // Sending configuration to server
+	A_ACTIVATE  Action = "activate"     // Activate a new device sent from CLI or Telegram
+	A_CMD       Action = "cmd"          // Send a command to endpoint
+	A_PROVISION Action = "provisioning" // Send configuration from server to IOT
+	A_VALUE     Action = "value"        // Send value from IOT
+	A_DISCOVER  Action = "discover"     // Send a discovery request to domain (handle by SERVER and IOT)
+	A_INFORM    Action = "inform"       // From IOT or SERVER sending information about endpoint
 
 	// Command definition
 	CMD_PUSH    Command = "push"
@@ -71,7 +73,7 @@ func (ht HostType) String() string {
 
 func (a Action) IsValid() error {
 	switch a {
-	case A_LOG, A_READLOG, A_NOTIFY, A_REGISTER, A_REJECTED, A_ACCEPTED, A_SETUP, A_ACTIVATE, A_CMD, A_PROVISION, A_VALUE, A_DISCOVER:
+	case A_LOG, A_READLOG, A_NOTIFY, A_REGISTER, A_REJECTED, A_ACCEPTED, A_SETUP, A_ACTIVATE, A_CMD, A_PROVISION, A_VALUE, A_DISCOVER, A_INFORM:
 		return nil
 	}
 	return errors.New(fmt.Sprintf("%s is not a valid action", a))
@@ -86,7 +88,9 @@ func (c Command) IsValid() error {
 }
 
 func (a Address) Match(comp Address) bool {
-	if (a.Domain == comp.Domain || comp.Domain == "*") &&
+	// to match domain must be the same and no wildcard is allowed for domain
+
+	if (a.Domain == comp.Domain) &&
 		(a.Type == comp.Type || comp.Type == "*") &&
 		(a.Address == comp.Address || comp.Address == "*") &&
 		(a.Host == comp.Host || comp.Host == "*") &&
@@ -98,17 +102,21 @@ func (a Address) Match(comp Address) bool {
 }
 
 func (lm LogMessage) SetFromInterface(data interface{}) LogMessage {
-
 	marshal, _ := json.Marshal(data)
 	converted := LogMessage{}
-	json.Unmarshal(marshal, &converted)
-	return converted
+	if err := json.Unmarshal(marshal, &converted); err == nil {
+		return converted
+	} else {
+		return LogMessage{}
+	}
 }
 
 func (e Endpoint) SetFromInterface(data interface{}) Endpoint {
-
 	marshal, _ := json.Marshal(data)
 	converted := Endpoint{}
-	json.Unmarshal(marshal, &converted)
-	return converted
+	if err := json.Unmarshal(marshal, &converted); err == nil {
+		return converted
+	} else {
+		return Endpoint{}
+	}
 }
