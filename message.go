@@ -12,18 +12,18 @@ type (
 	Command  string
 
 	Address struct {
-		Domain  string
-		Type    HostType
-		Host    string
-		Address string
-		Id      string
+		Domain  string `json:"domain"`
+		Type    HostType `json:"type"`
+		Host    string `json:"host"`
+		Address string `json:"address"`
+		Id      string `json:"id"`
 	}
 
 	Message struct {
-		Action   Action
-		Sender   Address
-		Receiver Address
-		Data     interface{}
+		Action   Action `json:"action"`
+		Sender   Address `json:"sender"`
+		Receiver Address `json:"receiver"`
+		Data     interface{} `json:"data"`
 	}
 )
 
