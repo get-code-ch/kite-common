@@ -32,9 +32,9 @@ type (
 	}
 
 	Notification struct {
-		Telegram bool `bson:"telegram,omitempty" json:"telegram,omitempty"`
-		Max      float64  `bson:"max,omitempty" json:"max,omitempty"`
-		Min      float64  `bson:"min,omitempty" json:"min,omitempty"`
+		Telegram bool    `bson:"telegram,omitempty" json:"telegram,omitempty"`
+		Max      float64 `bson:"max,omitempty" json:"max,omitempty"`
+		Min      float64 `bson:"min,omitempty" json:"min,omitempty"`
 	}
 
 	Endpoint struct {

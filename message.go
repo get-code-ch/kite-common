@@ -12,17 +12,17 @@ type (
 	Command  string
 
 	Address struct {
-		Domain  string `json:"domain"`
+		Domain  string   `json:"domain"`
 		Type    HostType `json:"type"`
-		Host    string `json:"host"`
-		Address string `json:"address"`
-		Id      string `json:"id"`
+		Host    string   `json:"host"`
+		Address string   `json:"address"`
+		Id      string   `json:"id"`
 	}
 
 	Message struct {
-		Action   Action `json:"action"`
-		Sender   Address `json:"sender"`
-		Receiver Address `json:"receiver"`
+		Action   Action      `json:"action"`
+		Sender   Address     `json:"sender"`
+		Receiver Address     `json:"receiver"`
 		Data     interface{} `json:"data"`
 	}
 )

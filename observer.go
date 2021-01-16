@@ -13,7 +13,7 @@ type (
 
 	// Event defines an indication of a point-in-time occurrence.
 	Event struct {
-		Data interface{}
+		Data   interface{}
 		Action Action
 	}
 )

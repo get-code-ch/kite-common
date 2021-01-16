@@ -47,4 +47,3 @@ func (a *Address) StringToAddress(str string) {
 		a.Id = "*"
 	}
 }
-
