@@ -55,6 +55,8 @@ const (
 	C_ENDPOINT    Collection = "endpoint"
 
 	// IcRef definition
+	I_VIRTUAL  IcRef = "virtual"
+	I_SOFT     IcRef = "soft"
 	I_MCP23008 IcRef = "mcp23008"
 	I_ADS1115  IcRef = "ads1115"
 )
