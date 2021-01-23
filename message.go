@@ -51,6 +51,8 @@ const (
 	A_VALUE     Action = "value"        // Send value from IOT
 	A_DISCOVER  Action = "discover"     // Send a discovery request to domain (handle by SERVER and IOT)
 	A_INFORM    Action = "inform"       // From IOT or SERVER sending information about endpoint
+	A_IMPORT	Action = "import"		// Import mongoDB from json file
+	A_EXPORT	Action = "export"		// Export mongoDB to json file
 
 	// Command definition
 	CMD_PUSH    Command = "push"
