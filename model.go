@@ -44,6 +44,7 @@ type (
 		IC           IC                     `bson:"ic,omitempty" json:"ic,omitempty"`
 		Address      Address                `bson:"address" json:"address"`
 		Attributes   map[string]interface{} `bson:"attributes,omitempty" json:"attributes,omitempty"`
+		UI           map[string]interface{} `bson:"ui,omitempty" json:"ui,omitempty"`
 		Notification Notification           `bson:"notification,omitempty" json:"notification,omitempty"`
 	}
 )
