@@ -60,4 +60,5 @@ const (
 	I_SOFT     IcRef = "soft"
 	I_MCP23008 IcRef = "mcp23008"
 	I_ADS1115  IcRef = "ads1115"
+	I_MCP3008  IcRef = "mcp3008"
 )

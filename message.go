@@ -53,6 +53,9 @@ const (
 	A_INFORM    Action = "inform"       // From IOT or SERVER sending information about endpoint
 	A_IMPORT    Action = "import"       // Import mongoDB from json file
 	A_EXPORT    Action = "export"       // Export mongoDB to json file
+	A_INSERT    Action = "insert"       // Insert or update record mongoDB from json file
+	A_PING      Action = "ping"         // Send a ping message
+	A_PONG      Action = "pong"         // Reply to a ping message
 
 	// Command definition
 	CMD_PUSH    Command = "push"
@@ -75,7 +78,7 @@ func (ht HostType) String() string {
 
 func (a Action) IsValid() error {
 	switch a {
-	case A_LOG, A_READLOG, A_NOTIFY, A_REGISTER, A_REJECTED, A_ACCEPTED, A_SETUP, A_ACTIVATE, A_CMD, A_PROVISION, A_VALUE, A_DISCOVER, A_INFORM, A_EXPORT, A_IMPORT:
+	case A_LOG, A_READLOG, A_NOTIFY, A_REGISTER, A_REJECTED, A_ACCEPTED, A_SETUP, A_ACTIVATE, A_CMD, A_PROVISION, A_VALUE, A_DISCOVER, A_INFORM, A_EXPORT, A_IMPORT, A_PING, A_PONG, A_INSERT:
 		return nil
 	}
 	return errors.New(fmt.Sprintf("%s is not a valid action", a))
