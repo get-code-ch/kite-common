@@ -25,10 +25,11 @@ type (
 	}
 
 	IC struct {
-		Address     int    `bson:"address" json:"address"`
-		Type        IcRef  `bson:"type" json:"type"`
-		Name        string `bson:"name,omitempty" json:"name,omitempty"`
-		Description string `bson:"description,omitempty" json:"description,omitempty"`
+		Address     int     `bson:"address" json:"address"`
+		Type        IcRef   `bson:"type" json:"type"`
+		Name        string  `bson:"name,omitempty" json:"name,omitempty"`
+		Description string  `bson:"description,omitempty" json:"description,omitempty"`
+		VRef        float64 `bson:"v_ref,omitempty" json:"v_ref,omitempty"`
 	}
 
 	Notification struct {
